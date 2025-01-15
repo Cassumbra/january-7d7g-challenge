@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cq8cj7l240wrn"]
+[gd_scene load_steps=15 format=3 uid="uid://cq8cj7l240wrn"]
 
 [ext_resource type="Texture2D" uid="uid://fsincpbwqfg5" path="res://2D/tank.png" id="1_4gu45"]
 [ext_resource type="Script" path="res://Game 2/player_tank.gd" id="1_8grl2"]
@@ -66,16 +66,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_heaeu"]
-size = Vector2(15.5, 7.5)
-
 [node name="PlayerTank" type="CharacterBody2D"]
 script = ExtResource("1_8grl2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tln1o")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -101,8 +98,40 @@ wait_time = 0.5
 one_shot = true
 autostart = true
 
-[node name="AreaClimb" type="Area2D" parent="."]
+[node name="TimerDig" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
 
-[node name="Collider" type="CollisionShape2D" parent="AreaClimb"]
-position = Vector2(4, -8)
-shape = SubResource("RectangleShape2D_heaeu")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 3.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Held Value:"
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 4.0
+offset_top = 21.0
+offset_right = 47.0
+offset_bottom = 44.0
+text = "Score:"
+
+[node name="HeldValue" type="Label" parent="CanvasLayer"]
+offset_left = 92.0
+offset_top = 4.0
+offset_right = 132.0
+offset_bottom = 27.0
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 56.0
+offset_top = 24.0
+offset_right = 96.0
+offset_bottom = 47.0

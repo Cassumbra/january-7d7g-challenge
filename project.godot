@@ -15,6 +15,10 @@ run/main_scene="res://Game 2/Main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Game2Constants="*res://game_2_constants.gd"
+
 [input]
 
 left={
