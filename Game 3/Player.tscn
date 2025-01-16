@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://ci5emajncn2oe"]
+[gd_scene load_steps=12 format=3 uid="uid://75qbhur5qdx1"]
 
-[ext_resource type="Script" path="res://Game 3/player.gd" id="1_mkfbi"]
 [ext_resource type="Texture2D" uid="uid://cg0htq5bn1ocd" path="res://2D/princess_iris.png" id="1_s5v77"]
+[ext_resource type="Script" path="res://Game 3/player.gd" id="1_tqdjy"]
 [ext_resource type="AudioStream" uid="uid://byh3i6kd6rako" path="res://Sound/step_ultralow.wav" id="3_7anko"]
 [ext_resource type="AudioStream" uid="uid://c3hx8y1fjoqv7" path="res://Sound/step_high.wav" id="4_8yhaq"]
 [ext_resource type="AudioStream" uid="uid://qmmh0bhwm4fs" path="res://Sound/hurt.wav" id="5_k6n5j"]
@@ -46,7 +46,7 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-script = ExtResource("1_mkfbi")
+script = ExtResource("1_tqdjy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ynq32")
@@ -80,3 +80,6 @@ volume_db = -3.962
 wait_time = 0.5
 one_shot = true
 autostart = true
+
+[node name="TimerFloat" type="Timer" parent="."]
+one_shot = true
