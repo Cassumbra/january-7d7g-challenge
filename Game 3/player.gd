@@ -57,7 +57,8 @@ func _physics_process(delta: float) -> void:
 		is_floating = true
 		can_start_float = false
 		float_direction = Vector2(horizontal, vertical)
-		float_velocity = velocity.length()
+		var dampening = 1 - (abs(angle_difference(float_direction.angle(), velocity.angle())) / PI)
+		float_velocity = velocity.length() * dampening
 		$TimerFloat.start()
 		
 	if Input.is_action_just_released("secondary") || $TimerFloat.is_stopped():
