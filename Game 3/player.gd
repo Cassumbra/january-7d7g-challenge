@@ -1,24 +1,36 @@
 extends CharacterBody2D
 
+@export var foreground: TileMapLayer
+@export var backwalls: TileMapLayer
 
 const SPEED = 60.0
-const ACCEL = 120.0
-const DEACCEL = 180.0
-const JUMP_VELOCITY = -150.0
+const ACCEL = 200.0
+const DEACCEL = 300.0
+const JUMP_VELOCITY = -50.0
+const JUMP_HOVER = -15.0
 const GRAVITY = Vector2(0, 400)
 
 
 var in_air_last_frame = false
+var respawn_position = Vector2.ZERO
 
 var can_start_float = false
 var is_floating = false
 var float_direction = Vector2.ZERO
 var float_velocity = 0.0
 
+func _ready() -> void:
+	respawn_position = position
+
 func _physics_process(delta: float) -> void:
-	if position.y > 140:
-		$SpeakerDie.play()
-		position = Vector2(2.0, -3.0)
+	var has_died = false
+	
+	
+	#if position.y > 140:
+		#has_died = true
+		
+		#$SpeakerDie.play()
+		#position = Vector2(2.0, -3.0)
 	
 	if is_on_floor() && in_air_last_frame:
 		$SpeakerLand.play()
@@ -34,8 +46,12 @@ func _physics_process(delta: float) -> void:
 		
 
 	# Handle jump.
-	if Input.is_action_just_pressed("primary") and is_on_floor():
+	if Input.is_action_just_pressed("primary") && is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		$TimerJump.start()
+		
+	if Input.is_action_pressed("primary") && !$TimerJump.is_stopped():
+		velocity.y += JUMP_HOVER
 
 
 		
@@ -58,7 +74,7 @@ func _physics_process(delta: float) -> void:
 		can_start_float = false
 		float_direction = Vector2(horizontal, vertical)
 		var dampening = 1 - (abs(angle_difference(float_direction.angle(), velocity.angle())) / PI)
-		float_velocity = velocity.length() * dampening
+		float_velocity = max(velocity.length() * dampening, SPEED)
 		$TimerFloat.start()
 		
 	if Input.is_action_just_released("secondary") || $TimerFloat.is_stopped():
@@ -83,3 +99,38 @@ func _physics_process(delta: float) -> void:
 	
 
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		
+		var collided_tile = foreground.local_to_map(collision.get_position()) #+ -Vector2i(collision.get_normal())
+		var data = foreground.get_cell_tile_data(collided_tile)
+		
+		if data:
+			#TODO: Can this be a match statement?
+			if data.get_custom_data("Hurts"):
+				has_died = true
+			
+				
+	if $Area.overlaps_body(foreground):
+		var collided_tile = foreground.local_to_map(position)
+		var data = foreground.get_cell_tile_data(collided_tile)
+		
+		if data:
+			if data.get_custom_data("Flag"):
+				if collided_tile != foreground.local_to_map(respawn_position):
+					var last_flag = foreground.local_to_map(respawn_position)
+					var data_2 = foreground.get_cell_tile_data(last_flag)
+					if data_2:
+						foreground.set_cell(last_flag, 0, data_2.get_custom_data("Breaks Into"))
+					respawn_position = position
+					foreground.set_cell(collided_tile, 0, data.get_custom_data("Breaks Into"))
+			elif data.get_custom_data("Victory"):
+				foreground.erase_cell(collided_tile)
+				process_mode = Node.PROCESS_MODE_DISABLED
+				$CanvasLayer.visible = true
+	
+	if has_died:
+		$SpeakerDie.play()
+		velocity = Vector2.ZERO
+		position = respawn_position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://75qbhur5qdx1"]
+[gd_scene load_steps=13 format=3 uid="uid://75qbhur5qdx1"]
 
 [ext_resource type="Texture2D" uid="uid://cg0htq5bn1ocd" path="res://2D/princess_iris.png" id="1_s5v77"]
 [ext_resource type="Script" path="res://Game 3/player.gd" id="1_tqdjy"]
@@ -45,6 +45,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m85ay"]
+size = Vector2(8, 8)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_tqdjy")
 
@@ -52,11 +55,11 @@ script = ExtResource("1_tqdjy")
 shape = SubResource("RectangleShape2D_ynq32")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
-limit_left = 0
-limit_top = -128
-limit_right = 1560
-limit_bottom = 144
+zoom = Vector2(2, 2)
+limit_left = -160
+limit_top = -608
+limit_right = 2360
+limit_bottom = 160
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -82,4 +85,33 @@ one_shot = true
 autostart = true
 
 [node name="TimerFloat" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
+
+[node name="TimerJump" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="Area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Collider" type="CollisionShape2D" parent="Area"]
+shape = SubResource("RectangleShape2D_m85ay")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -11.5
+offset_right = 56.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "you're winner!"
