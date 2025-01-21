@@ -1,0 +1,145 @@
+[gd_scene load_steps=21 format=3 uid="uid://ddnft113fsnfh"]
+
+[ext_resource type="Script" path="res://Game 4/rose.gd" id="1_xg41q"]
+[ext_resource type="PackedScene" uid="uid://cf0pgcnylyptx" path="res://Game 4/Reticle.tscn" id="2_g375a"]
+[ext_resource type="Texture2D" uid="uid://b1pgaar785im" path="res://2D/rose.png" id="2_mtrro"]
+[ext_resource type="Texture2D" uid="uid://dp348wkg33ely" path="res://2D/rose_walk.png" id="3_tgrrv"]
+[ext_resource type="AudioStream" uid="uid://byh3i6kd6rako" path="res://Sound/step_ultralow.wav" id="4_wosxn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_etshp"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4wp0"]
+atlas = ExtResource("2_mtrro")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o41m8"]
+atlas = ExtResource("2_mtrro")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uoffy"]
+atlas = ExtResource("2_mtrro")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44b8q"]
+atlas = ExtResource("2_mtrro")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll5si"]
+atlas = ExtResource("3_tgrrv")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7rpo"]
+atlas = ExtResource("3_tgrrv")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_win84"]
+atlas = ExtResource("3_tgrrv")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae5im"]
+atlas = ExtResource("3_tgrrv")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgppy"]
+atlas = ExtResource("3_tgrrv")
+region = Rect2(32, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm536"]
+atlas = ExtResource("3_tgrrv")
+region = Rect2(40, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkr0l"]
+atlas = ExtResource("3_tgrrv")
+region = Rect2(48, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1faep"]
+atlas = ExtResource("3_tgrrv")
+region = Rect2(56, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0twrw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4wp0")
+}, {
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_o41m8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uoffy")
+}, {
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_44b8q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll5si")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7rpo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_win84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ae5im")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgppy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm536")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jkr0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1faep")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_auelm"]
+size = Vector2(8, 8)
+
+[node name="Rose" type="CharacterBody2D"]
+script = ExtResource("1_xg41q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_etshp")
+
+[node name="Reticle" parent="." instance=ExtResource("2_g375a")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_0twrw")
+frame_progress = 0.334277
+
+[node name="SpeakerStep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_wosxn")
+volume_db = -3.962
+
+[node name="TimerStep" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="Area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Collider" type="CollisionShape2D" parent="Area"]
+shape = SubResource("RectangleShape2D_auelm")
+
+[node name="TimerInebriation" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="TimerInebriation" to="." method="_on_timer_inebriation_timeout"]

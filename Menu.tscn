@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwtv803f6d5lg"]
+
+[ext_resource type="Script" path="res://menu.gd" id="1_osraw"]
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_osraw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 0.486275)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -20.0
+offset_right = 175.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonGame1" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Iris 1"
+
+[node name="ButtonGame2" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Miner"
+
+[node name="ButtonGame3" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Iris 2"
+
+[node name="ButtonGame4" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Rose (WIP)"
+
+[node name="ButtonGame5" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "???"
+
+[node name="ButtonGame6" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "???"
+
+[node name="ButtonGame7" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "???"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonQuit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Exit Program"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonGame1" to="." method="_on_button_game_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonGame2" to="." method="_on_button_game_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonGame3" to="." method="_on_button_game_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonGame4" to="." method="_on_button_game_4_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonQuit" to="." method="_on_button_quit_pressed"]

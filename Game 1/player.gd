@@ -7,10 +7,13 @@ const GRAVITY = Vector2(0, 400)
 
 var in_air_last_frame = false
 
+func _ready() -> void:
+	position = Vector2(3.0, -2.0)
+
 func _physics_process(delta: float) -> void:
 	if position.y > 140:
 		$SpeakerDie.play()
-		position = Vector2(2.0, -3.0)
+		position = Vector2(3.0, -2.0)
 	
 	if is_on_floor() && in_air_last_frame:
 		$SpeakerLand.play()
@@ -25,12 +28,12 @@ func _physics_process(delta: float) -> void:
 		
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("primary") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
+	var direction := Input.get_axis("left", "right")
 	if direction:
 		velocity.x = direction * SPEED
 	else:

@@ -11,13 +11,15 @@ config_version=5
 [application]
 
 config/name="JANUARY 7D7G CHALLENGE"
-run/main_scene="res://Game 3/Level 1.tscn"
+run/main_scene="res://Game 1/Level 1.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Game2Constants="*res://game_2_constants.gd"
+Game4Constants="*res://Game 4/game_4_constants.gd"
+Menu="*res://Menu.tscn"
 
 [display]
 
