@@ -19,6 +19,7 @@ var is_floating = false
 var float_direction = Vector2.ZERO
 var float_velocity = 0.0
 
+
 func _ready() -> void:
 	respawn_position = position
 
@@ -59,14 +60,20 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var horizontal := Input.get_axis("left", "right")
 	var vertical := Input.get_axis("up", "down")
-	if horizontal:
+	# Fast deaccel
+	if horizontal * -1 == sign(velocity.x):
+		velocity.x = move_toward(velocity.x, 0, (DEACCEL + ACCEL) * delta)
+	# Regular movement
+	elif horizontal:
 		if horizontal == 1 && velocity.x < SPEED:
 			velocity.x = move_toward(velocity.x, SPEED, ACCEL * delta)
 		elif horizontal == -1 && velocity.x > -SPEED:
 			velocity.x = move_toward(velocity.x, -SPEED, ACCEL * delta)
-	#TODO: I think pressing nothing is a faster deaccel than holding back? this is weird!
+	# Deaccel
 	else:
 		velocity.x = move_toward(velocity.x, 0, DEACCEL * delta)
+		
+
 		
 	# Handle float.
 	if Input.is_action_just_pressed("secondary") && can_start_float:
@@ -77,8 +84,19 @@ func _physics_process(delta: float) -> void:
 		float_velocity = max(velocity.length() * dampening, SPEED)
 		$TimerFloat.start()
 		
+		if horizontal * vertical == 0:
+			$ParticlesFloat.direction = Vector2(vertical, horizontal)
+		else:
+			$ParticlesFloat.direction = Vector2(-horizontal, vertical)
+		
+		$ParticlesFloatInverse.direction = $ParticlesFloat.direction * -1
+		$ParticlesFloat.emitting = true
+		$ParticlesFloatInverse.emitting = true
+		
 	if Input.is_action_just_released("secondary") || $TimerFloat.is_stopped():
 		is_floating = false
+		$ParticlesFloat.emitting = false
+		$ParticlesFloatInverse.emitting = false
 	
 	if is_floating:
 		velocity = float_velocity * float_direction
