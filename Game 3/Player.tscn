@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://75qbhur5qdx1"]
+[gd_scene load_steps=15 format=3 uid="uid://75qbhur5qdx1"]
 
 [ext_resource type="Texture2D" uid="uid://cg0htq5bn1ocd" path="res://2D/princess_iris.png" id="1_s5v77"]
 [ext_resource type="Script" path="res://Game 3/player.gd" id="1_tqdjy"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://c3hx8y1fjoqv7" path="res://Sound/step_high.wav" id="4_8yhaq"]
 [ext_resource type="AudioStream" uid="uid://qmmh0bhwm4fs" path="res://Sound/hurt.wav" id="5_k6n5j"]
 [ext_resource type="PackedScene" uid="uid://cu3i5u8n2rc6w" path="res://Game 3/particles_float.tscn" id="6_13sik"]
+[ext_resource type="AudioStream" uid="uid://c7apsywsa24pt" path="res://Sound/2025-01-21 float.wav" id="7_j7e2r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ynq32"]
 size = Vector2(7.5, 8)
@@ -85,6 +86,10 @@ volume_db = -3.962
 [node name="SpeakerDie" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_k6n5j")
 volume_db = -3.962
+
+[node name="SpeakerFloat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_j7e2r")
+volume_db = -4.0
 
 [node name="TimerStep" type="Timer" parent="."]
 wait_time = 0.5

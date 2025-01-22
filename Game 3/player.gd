@@ -19,13 +19,19 @@ var is_floating = false
 var float_direction = Vector2.ZERO
 var float_velocity = 0.0
 
+var float_tween: Tween
+const FLOAT_TWEEN_MIN_VOLUME = -50
+const FLOAT_TWEEN_TIME = 1
 
 func _ready() -> void:
 	respawn_position = position
+	float_tween = get_tree().create_tween()
+	float_tween.tween_property($SpeakerFloat, "volume_db", FLOAT_TWEEN_MIN_VOLUME, FLOAT_TWEEN_TIME)
+	float_tween.stop()
 
 func _physics_process(delta: float) -> void:
 	var has_died = false
-	
+
 	
 	#if position.y > 140:
 		#has_died = true
@@ -93,10 +99,19 @@ func _physics_process(delta: float) -> void:
 		$ParticlesFloat.emitting = true
 		$ParticlesFloatInverse.emitting = true
 		
-	if Input.is_action_just_released("secondary") || $TimerFloat.is_stopped():
+		$SpeakerFloat.volume_db = -6
+		print($SpeakerFloat.volume_db)
+		$SpeakerFloat.play()
+		float_tween.stop()
+		
+	if (Input.is_action_just_released("secondary") || $TimerFloat.is_stopped()) && is_floating == true:
 		is_floating = false
 		$ParticlesFloat.emitting = false
 		$ParticlesFloatInverse.emitting = false
+		
+		float_tween = get_tree().create_tween()
+		float_tween.tween_property($SpeakerFloat, "volume_db", FLOAT_TWEEN_MIN_VOLUME, FLOAT_TWEEN_TIME)
+		
 	
 	if is_floating:
 		velocity = float_velocity * float_direction
