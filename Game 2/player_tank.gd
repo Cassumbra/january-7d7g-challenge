@@ -3,6 +3,10 @@ extends CharacterBody2D
 @export var foreground: TileMapLayer
 @export var backwalls: TileMapLayer
 
+@export var label_score: Label
+@export var label_held_value: Label
+
+
 const SPEED = 60.0
 const JUMP_VELOCITY = -150.0
 const GRAVITY = Vector2(0, 400)
@@ -27,8 +31,8 @@ func _physics_process(delta: float) -> void:
 	if foreground.local_to_map(position).y <= 0:
 		score += held_value
 		held_value = 0
-		$CanvasLayer/Score.set_text(str(score))
-		$CanvasLayer/HeldValue.set_text(str(held_value))
+		label_score.set_text(str(score))
+		label_held_value.set_text(str(held_value))
 	
 	if Input.is_action_pressed("secondary") && $TimerDig.is_stopped():
 		$TimerDig.start()
@@ -55,7 +59,7 @@ func _physics_process(delta: float) -> void:
 				if data.get_custom_data("Breakable"):
 					foreground.erase_cell(position)
 					held_value += data.get_custom_data("Value")
-					$CanvasLayer/HeldValue.set_text(str(held_value))
+					label_held_value.set_text(str(held_value))
 					if data.get_custom_data("Breaks Into") != Vector2i(-1, -1):
 						backwalls.set_cell(position, 0, data.get_custom_data("Breaks Into"))
 		

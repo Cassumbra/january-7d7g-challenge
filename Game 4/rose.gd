@@ -53,11 +53,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if $Area.overlaps_body(collectables):
+		print("wghat")
 		var collided_tile = collectables.local_to_map(position)
 		var data = collectables.get_cell_tile_data(collided_tile)
 		
 		if data:
 			collectables.erase_cell(collided_tile)
+			print("smiles")
 			match data.get_custom_data("Collectable"):
 				"regular":
 					score += 1 * multiplier

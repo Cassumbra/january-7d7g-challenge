@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://coarosykfxsav"]
+
+[ext_resource type="PackedScene" uid="uid://bx8q5gh5vqroe" path="res://Game 4/AppleBase.tscn" id="1_amwb6"]
+
+[node name="AppleBase" instance=ExtResource("1_amwb6")]

@@ -52,8 +52,12 @@ func _physics_process(delta: float) -> void:
 		
 		
 
+	# Jump buffering.
+	if Input.is_action_just_pressed("primary") && !is_on_floor():
+		$TimerJumpBuffer.start()
+	
 	# Handle jump.
-	if Input.is_action_just_pressed("primary") && is_on_floor():
+	if (Input.is_action_just_pressed("primary") || !$TimerJumpBuffer.is_stopped()) && is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		$TimerJump.start()
 		
@@ -70,14 +74,20 @@ func _physics_process(delta: float) -> void:
 	if horizontal * -1 == sign(velocity.x):
 		velocity.x = move_toward(velocity.x, 0, (DEACCEL + ACCEL) * delta)
 	# Regular movement
-	elif horizontal:
-		if horizontal == 1 && velocity.x < SPEED:
-			velocity.x = move_toward(velocity.x, SPEED, ACCEL * delta)
-		elif horizontal == -1 && velocity.x > -SPEED:
-			velocity.x = move_toward(velocity.x, -SPEED, ACCEL * delta)
+	elif horizontal == 1 && velocity.x < SPEED:
+		velocity.x = move_toward(velocity.x, SPEED, ACCEL * delta)
+	elif horizontal == -1 && velocity.x > -SPEED:
+		velocity.x = move_toward(velocity.x, -SPEED, ACCEL * delta)
 	# Deaccel
 	else:
-		velocity.x = move_toward(velocity.x, 0, DEACCEL * delta)
+		var deaccel_reduction = 1
+		if !is_on_floor():
+			deaccel_reduction *= 10
+			
+		if sign(horizontal) == sign(velocity.x):
+			deaccel_reduction *= 10
+		
+		velocity.x = move_toward(velocity.x, 0, DEACCEL/deaccel_reduction * delta)
 		
 
 		
@@ -99,8 +109,7 @@ func _physics_process(delta: float) -> void:
 		$ParticlesFloat.emitting = true
 		$ParticlesFloatInverse.emitting = true
 		
-		$SpeakerFloat.volume_db = -6
-		print($SpeakerFloat.volume_db)
+		$SpeakerFloat.volume_db = -8
 		$SpeakerFloat.play()
 		float_tween.stop()
 		

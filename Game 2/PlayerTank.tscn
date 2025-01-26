@@ -66,8 +66,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="PlayerTank" type="CharacterBody2D"]
+[node name="PlayerTank" type="CharacterBody2D" node_paths=PackedStringArray("label_score", "label_held_value")]
 script = ExtResource("1_8grl2")
+label_score = NodePath("CanvasLayer/VBoxContainer/HBoxContainer2/Score")
+label_held_value = NodePath("CanvasLayer/VBoxContainer/HBoxContainer/HeldValue")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tln1o")
@@ -105,33 +107,26 @@ autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 1.0
-offset_right = 3.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 text = "Held Value:"
 
-[node name="Label2" type="Label" parent="CanvasLayer"]
-offset_left = 4.0
-offset_top = 21.0
-offset_right = 47.0
-offset_bottom = 44.0
+[node name="HeldValue" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
 text = "Score:"
 
-[node name="HeldValue" type="Label" parent="CanvasLayer"]
-offset_left = 92.0
-offset_top = 4.0
-offset_right = 132.0
-offset_bottom = 27.0
-
-[node name="Score" type="Label" parent="CanvasLayer"]
-offset_left = 56.0
-offset_top = 24.0
-offset_right = 96.0
-offset_bottom = 47.0
+[node name="Score" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
