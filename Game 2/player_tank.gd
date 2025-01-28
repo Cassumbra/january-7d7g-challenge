@@ -20,7 +20,7 @@ var score = 0
 func _ready() -> void:
 	$Camera.limit_left = 0
 	$Camera.limit_right = Game2Constants.MAP_WIDTH * 8
-	$Camera.limit_top = -10 * 8
+	$Camera.limit_top = -4 * 8
 	$Camera.limit_bottom = Game2Constants.MAP_HEIGHT * 8
 
 func _physics_process(delta: float) -> void:

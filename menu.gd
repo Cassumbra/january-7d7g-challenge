@@ -15,9 +15,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		if is_visible():
+			get_tree().paused = false
 			hide()
 		else:
-			visible = true
+			get_tree().paused = true
+			show()
 
 
 func goto_scene(path):

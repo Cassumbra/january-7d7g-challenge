@@ -38,6 +38,6 @@ func _process(delta: float) -> void:
 								set_cell(adj, 0, lava)
 								just_placed.push_back(adj)
 							# Dirt. Random chance.
-							elif rng.randf_range(0.0, 1.0) > 0.90 :
+							elif rng.randf_range(0.0, 1.0) > 0.975 :
 								set_cell(adj, 0, lava)
 								just_placed.push_back(adj)

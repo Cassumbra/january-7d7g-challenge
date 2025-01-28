@@ -75,7 +75,7 @@ label_held_value = NodePath("CanvasLayer/VBoxContainer/HBoxContainer/HeldValue")
 shape = SubResource("RectangleShape2D_tln1o")
 
 [node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
+zoom = Vector2(2, 2)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -101,7 +101,7 @@ one_shot = true
 autostart = true
 
 [node name="TimerDig" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.35
 one_shot = true
 autostart = true
 
