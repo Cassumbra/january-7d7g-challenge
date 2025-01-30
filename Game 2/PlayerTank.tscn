@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cq8cj7l240wrn"]
+[gd_scene load_steps=16 format=3 uid="uid://cq8cj7l240wrn"]
 
 [ext_resource type="Texture2D" uid="uid://fsincpbwqfg5" path="res://2D/tank.png" id="1_4gu45"]
 [ext_resource type="Script" path="res://Game 2/player_tank.gd" id="1_8grl2"]
@@ -66,6 +66,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ifwm"]
+size = Vector2(8, 8)
+
 [node name="PlayerTank" type="CharacterBody2D" node_paths=PackedStringArray("label_score", "label_held_value")]
 script = ExtResource("1_8grl2")
 label_score = NodePath("CanvasLayer/VBoxContainer/HBoxContainer2/Score")
@@ -130,3 +133,10 @@ text = "Score:"
 
 [node name="Score" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+
+[node name="Area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Collider" type="CollisionShape2D" parent="Area"]
+shape = SubResource("RectangleShape2D_0ifwm")

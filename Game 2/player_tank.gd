@@ -108,23 +108,31 @@ func _physics_process(delta: float) -> void:
 	
 
 	move_and_slide()
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		
-		var collided_tile = foreground.local_to_map(collision.get_position()) #+ -Vector2i(collision.get_normal())
+	
+	if $Area.overlaps_body(foreground):
+		var collided_tile = foreground.local_to_map(position)
 		var data = foreground.get_cell_tile_data(collided_tile)
 		
 		if data:
 			if data.get_custom_data("Lava"):
 				# TODO: Copied code! bad practice
+				#		Best would be to send a signal, I believe. Too bad!
 				$SpeakerDie.play()
 				$AnimatedSprite2D.hide()
 				is_dead = true
+			elif data.get_custom_data("Climbable"):
+				Global.todo()
+				
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		#var collided_tile = foreground.local_to_map(collision.get_position()) #+ -Vector2i(collision.get_normal())
+		#var data = foreground.get_cell_tile_data(collided_tile)
 		
 		#step up
 		if collision.get_normal().x != 0 \
 		&& foreground.get_cell_source_id(foreground.local_to_map(position) + Vector2i(0, -1)) \
 		&& foreground.get_cell_source_id(foreground.local_to_map(position) + Vector2i(-collision.get_normal().x, -1)) \
-		&& is_on_floor() && !Input.is_action_pressed("down"):
+		&& is_on_floor() && Input.is_action_pressed("up"):
 			position += Vector2(-collision.get_normal().x * 0.1, -8)
 			#print("beep!")
