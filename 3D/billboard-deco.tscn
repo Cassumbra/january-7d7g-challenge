@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://qyo3v4bw8smd" path="res://3D/billboard_deco.gd" id="2_76khw"]
 
 [node name="BillboardDeco" type="Sprite3D"]
+flip_h = true
 pixel_size = 0.025
 texture = ExtResource("1_dtvom")
 script = ExtResource("2_76khw")
 rotation_type = "Y-Billboard"
-flip_horizontal = true
