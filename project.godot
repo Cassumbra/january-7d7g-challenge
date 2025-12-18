@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 Game2Constants="*res://game_2_constants.gd"
 Game4Constants="*res://Game 4/game_4_constants.gd"
 Menu="*res://Menu.tscn"
-Global="*res://global.gd"
+Global3d="*res://3D/global-3d.gd"
 
 [display]
 
