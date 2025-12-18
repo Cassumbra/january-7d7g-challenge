@@ -5,6 +5,8 @@
 
 [resource]
 albedo_texture = ExtResource("1_tlogd")
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.43
 normal_enabled = true
 normal_scale = 0.1
 normal_texture = ExtResource("2_rmibw")
