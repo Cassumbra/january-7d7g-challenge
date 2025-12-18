@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://bdol654xj0paf"]
+[gd_scene load_steps=27 format=4 uid="uid://bdol654xj0paf"]
 
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_qffsx"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_ai02v"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://b583mprp1nwkh" path="res://textures/base/grass.tres" id="5_44ouy"]
 [ext_resource type="Texture2D" uid="uid://bq1vbfc0fjmnf" path="res://textures/base/brick1.png" id="6_gai0j"]
 [ext_resource type="PackedScene" uid="uid://dhh7sct7x52ep" path="res://3D/player/player.tscn" id="7_44ouy"]
+[ext_resource type="PackedScene" uid="uid://csv5rvs4a0d0x" path="res://3D/billboard-deco.tscn" id="8_gai0j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12kqo"]
 albedo_texture = ExtResource("6_gai0j")
@@ -179,3 +180,8 @@ camera_attributes = SubResource("CameraAttributesPractical_44ouy")
 
 [node name="Player" parent="." instance=ExtResource("7_44ouy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9974854, -7.933078)
+
+[node name="BillboardDeco" parent="." instance=ExtResource("8_gai0j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.123393, 0.812595, -3.6410828)
+billboard = 2
+texture_filter = 2
