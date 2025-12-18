@@ -182,6 +182,7 @@ camera_attributes = SubResource("CameraAttributesPractical_44ouy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9974854, -7.933078)
 
 [node name="BillboardDeco" parent="." instance=ExtResource("8_gai0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.123393, 0.812595, -3.6410828)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1210418, 1.0834923, -3.3922334)
+pixel_size = 0.025
 billboard = 2
 texture_filter = 2

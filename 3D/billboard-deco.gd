@@ -15,14 +15,14 @@ extends Node
 #
 #export(Array, AudioStream) var voices
 #
-#export var snap_to_ground = true
+@export var snap_to_ground = true
 
 #var voice_index = 0
 
 #@onready var sprite = $Sprite3D
 #@onready var voice = $Voice
 
-#@onready var world
+@onready var world
 
 var player
 var player_pos
@@ -36,21 +36,22 @@ signal send_object(bind)
 #End of defining corruption mechanic variables.
 @export_enum("Y-Billboard", "Y-Billboard Flip", "Billboard", "Flat", "Spin") var rotation_type: String
 
-@export var flip_h: Bool
+@export var flip_h: bool
 
 func _ready():
-	sprites[0] = sprite.texture
-	sprite.texture = sprites[randi() % sprites.size()]
-	voice.stream = voices[randi() % voices.size()]
+	#sprites[0] = texture
+	#sprite.texture = sprites[randi() % sprites.size()]
+	#voice.stream = voices[randi() % voices.size()]
 	
-	if snap_to_ground:
-		move_and_slide_with_snap(Vector3(0, 0, 0), Vector3.DOWN, Vector3.UP)
+	#if snap_to_ground:
+	#	move_and_slide_with_snap(Vector3(0, 0, 0), Vector3.DOWN, Vector3.UP)
 	
 	
 	#Make sure to also update world whenever world scene is changed!!
 	#world = get_node("..")
 	world = get_owner()
-	connect("send_object", world, "_on_Object_send_object")
+	send_object.connect(_on_Object_send_object.bind(world))
+	#connect("send_object", world, "_on_Object_send_object")
 	emit_signal("send_object", self)
 
 	
@@ -77,16 +78,16 @@ func billboard(flip = false):
 		else:
 			sprite.flip_h = flip_h
 
-func play_sample():
-	var player = voice.duplicate()
-	add_child(player)
-	player.play()
-	yield(player, "finished")
-	player.queue_free()
+#func play_sample():
+	#var player = voice.duplicate()
+	#add_child(player)
+	#player.play()
+	#await player.finished
+	#player.queue_free()
 	
-func interact(interactor):
-	play_sample()
-	emit_signal("interact", interactor)
+#func interact(interactor):
+	#play_sample()
+	#emit_signal("interact", interactor)
 
 func _on_World_send_player(p):
 	player = p
