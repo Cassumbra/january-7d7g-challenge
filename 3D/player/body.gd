@@ -25,7 +25,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	floor_snap_length = 0.05
 	move_and_slide()
 	
 	Global3d.player_pos = global_position
