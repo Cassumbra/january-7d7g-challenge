@@ -1,7 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://csv5rvs4a0d0x"]
+[gd_scene load_steps=3 format=3 uid="uid://csv5rvs4a0d0x"]
 
-[ext_resource type="Texture2D" uid="uid://wjbuyxo2oxmb" path="res://3D/yellow potted plant 1.2.png" id="1_dtvom"]
+[ext_resource type="Texture2D" uid="uid://xtm3cfumxdwu" path="res://3D/yellow potted plant 1.1.png" id="1_dtvom"]
+
+[sub_resource type="GDScript" id="GDScript_dtvom"]
+script/source = "extends Sprite3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [node name="BillboardDeco" type="Sprite3D"]
 billboard = 1
 texture = ExtResource("1_dtvom")
+script = SubResource("GDScript_dtvom")
