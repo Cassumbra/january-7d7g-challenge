@@ -6,8 +6,8 @@
 [ext_resource type="Material" uid="uid://c3qcsw5dse5io" path="res://textures/base/concrete.tres" id="4_xdmud"]
 [ext_resource type="Material" uid="uid://b583mprp1nwkh" path="res://textures/base/grass.tres" id="5_44ouy"]
 [ext_resource type="Material" uid="uid://8b55mjat5skv" path="res://textures/base/brick1.tres" id="6_12kqo"]
-[ext_resource type="Material" uid="uid://dnj5atrvfn88w" path="res://textures/base/wood_planks.tres" id="7_va547"]
-[ext_resource type="PackedScene" uid="uid://wj7po3fg06ac" path="res://3D/player/unified_player.tscn" id="8_12kqo"]
+[ext_resource type="PackedScene" uid="uid://dhh7sct7x52ep" path="res://3D/player/player.tscn" id="7_44ouy"]
+[ext_resource type="Material" path="res://textures/base/wood_planks.tres" id="7_va547"]
 [ext_resource type="PackedScene" uid="uid://csv5rvs4a0d0x" path="res://3D/billboard-deco.tscn" id="8_gai0j"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_rn4hi"]
@@ -252,7 +252,8 @@ light_energy = 4.177
 environment = SubResource("Environment_xdmud")
 camera_attributes = SubResource("CameraAttributesPractical_44ouy")
 
-[node name="UnifiedPlayer" parent="." instance=ExtResource("8_12kqo")]
+[node name="Player" parent="." instance=ExtResource("7_44ouy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9974854, -7.933078)
 
 [node name="BillboardDeco" parent="." instance=ExtResource("8_gai0j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1210418, 1.0834923, -3.3922334)
