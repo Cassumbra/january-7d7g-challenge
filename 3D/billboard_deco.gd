@@ -2,7 +2,7 @@ extends Sprite3D
 
 @export_enum("Y-Billboard", "Y-Billboard Flip", "Billboard", "Flat", "Spin") var rotation_type: String
 
-#@export var flip_horizontal: bool
+@export var flip_horizontal: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
